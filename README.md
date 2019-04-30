@@ -31,6 +31,19 @@
     * `rz` 上传命令
     * `sz` 下载命令
 
+##### 基本命令
+* `ps -ef|grep softName` 查看进程 id
+* `kill id` 更具 id 关闭进程
+
+* `mkdir filePath` 添加文件路径
+* `touch fileName` 添加文件
+* `rm -rf fileName` 删除文件及文件夹
+
+* `systemctl start firewalld` 启用防火墙
+* `systemctl stop firewalld` 关闭防火墙
+* `firewall-cmd --zone=public --add-port=80/tcp --permanent` 在防火墙上开启端口（--permanent永久生效，没有此参数重启后失效）
+* `firewall-cmd --zone= public --remove-port=80/tcp --permanent` 删除开启的端口
+
 ##### 安装 nodejs 环境
 * `http://nodejs.cn/` 在该网站找到源代码版 .tar.gz 文件下载地址
 * `wget https://npm.taobao.org/mirrors/node/v10.13.0/node-v10.13.0.tar.gz` 使用该命令下载压缩包--地址可替换为最新版 nodejs 源码地址
