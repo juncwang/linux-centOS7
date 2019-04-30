@@ -92,7 +92,7 @@ vi mongodb.conf
 
 # 5.在文件中插入如下内容
 #日志文件位置
-logpath=/data/db/journal/mongodb.log　　（这些都是可以自定义修改的）
+logpath=/usr/local/mongodb/logs/mongodb.log　
 
 # 以追加方式写入日志
 logappend=true
@@ -104,7 +104,7 @@ fork = true
 #port = 27017
 
 # 数据库文件位置
-dbpath=/data/db
+dbpath=/usr/local/mongodb/data/db
 
 # 启用定期记录CPU利用率和 I/O 等待
 #cpu = true
