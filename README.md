@@ -51,10 +51,28 @@
 
 * `whereis softName` 查询安装的软件路径
 
-##### 设置启动运行
+##### 设置开机启动运行
 * `vi /etc/rc.local` 编辑文件
 * 在末尾添加需要启动程序的操作指令
 * `chmod 755 rc.local` 增加权限
+
+##### 设置定时任务
+* 创建一个 shFileName.sh 文件
+```sh
+# !/bin/bash
+# 定义变量
+LOGPATH=/usr/local/nginx/logs/access.log
+BASEPATH=/data
+bak=$BASEPATH/$(date -d yesterday +%Y%m%d%H%M).access.log
+
+# linux 基本操作
+mv $LOGPATH $bak
+touch $LOGPATH
+
+kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+```
+* 执行 `crontab -e` 并写入
+    * `*/1 * * * * sh /shFilePaht/shFileName.sh` 
 
 ##### 安装 nodejs 环境
 * `http://nodejs.cn/` 在该网站找到源代码版 .tar.gz 文件下载地址
@@ -264,7 +282,7 @@ http {
     # 说明该 server 塔的访问日志文件是 logs/access.log, 使用的格式为 main
     # access_log  logs/access.log  main;
 
-    # 这是虚拟主机段
+    # 这是虚拟主机段 ( 可以有多个 )
     server {
         # 需要监听的端口
         listen       80;
@@ -274,7 +292,7 @@ http {
         # 单独为该服务配置一个日志, 使用格式为 main
         # access_log logs/localhost.log main
 
-        # 定位, 把特殊的路径或文件再次定位, 如 image 目录单独处理
+        # 定位, 把特殊的路径或文件再次定位, 如 image 目录单独处理 ( 可以有多个 )
         location / {
             # 文件路径
             root   html;
