@@ -298,7 +298,15 @@ http {
             root   html;
             # 默认取哪一个页面作为主页
             index  index.html index.htm;
+            # 所有其他网页参数都返回给 index.html 进行处理
+            # try_files $uri $uri/ /index.html;
         }
+
+        # 添加访问目录为/apis的代理配置
+        # location /apis { 
+		# 	rewrite  ^/apis/(.*)$ /$1 break;
+		# 	proxy_pass   http://192.168.78.113:5000;
+        # }
 
         #error_page  404              /404.html;
 
