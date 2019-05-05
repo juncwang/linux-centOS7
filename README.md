@@ -44,6 +44,13 @@
 * `firewall-cmd --zone=public --add-port=80/tcp --permanent` 在防火墙上开启端口（--permanent永久生效，没有此参数重启后失效）
 * `firewall-cmd --zone= public --remove-port=80/tcp --permanent` 删除开启的端口
 
+* `whereis softName` 查询安装的软件路径
+
+##### 设置启动运行
+* `vi /etc/rc.local` 编辑文件
+* 在末尾添加需要启动程序的操作指令
+* `chmod 755 rc.local` 增加权限
+
 ##### 安装 nodejs 环境
 * `http://nodejs.cn/` 在该网站找到源代码版 .tar.gz 文件下载地址
 * `wget https://npm.taobao.org/mirrors/node/v10.13.0/node-v10.13.0.tar.gz` 使用该命令下载压缩包--地址可替换为最新版 nodejs 源码地址
@@ -191,3 +198,31 @@ cd /usr/local/mongodb/bin
 # 访问数据库
 ./mongo
 ```
+
+##### 安装nginx
+* 安装前需要安装以下软件
+    * `yum install gcc-c++` 
+    * `yum install -y pcre pcre-devel`
+    * `yum install -y zlib zlib-devel`
+    * `yum install -y openssl openssl-devel`
+
+* 安装包下载地址 `https://nginx.org/en/download.html`
+    * `wget -c https://nginx.org/download/nginx-1.10.1.tar.gz` 使用该命令进行下载
+    * `tar -zxvf nginx-1.10.1.tar.gz` 解压
+    * `cd nginx-1.10.1` 进入文件夹
+    * `./configure` 使用默认配置
+    * `make` 开始编译
+    * `make install` 开始安装
+    * `whereis nginx` 获取安装路径
+    * `cd /usr/local/nginx/sbin/` 进入 nginx 路径
+        * 启动、停止
+            * `./nginx` 启动
+            * `./nginx -s stop` 停止, 直接杀死进程
+            * `./nginx -s quit` 停止, 等到进程处理完毕后停止
+            * `./nginx -s reload` 重启
+        * 查看进程 
+            * `ps aux|grep nginx`
+
+* 配置 nginx
+    * `cd /usr/local/nginx/conf` 进入配置路径
+    * `vi nginx.conf` 编辑配置文件
