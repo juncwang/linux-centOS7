@@ -28,12 +28,17 @@
 * `gcc -v` 验证是否安装成功
 
 * `yum install lrzsz -y` 安装上传下载插件, 支持 `Xshell 5`
-    * `rz` 上传命令
-    * `sz` 下载命令
+
+* `yum -y install vim*` 安装 vim
+    * 基本操作
+        * `:q` 直接退出
+        * `:wq` 保存退出
+        * `:set nu` 显示行号
 
 ##### 基本命令
 * `ps -ef|grep softName` 查看进程 id
-* `kill id` 更具 id 关闭进程
+* `ps aux|grep softName` 查看进程 id
+* `kill id` 根据 id 直接关闭进程
 
 * `mkdir filePath` 添加文件路径
 * `touch fileName` 添加文件
@@ -216,13 +221,134 @@ cd /usr/local/mongodb/bin
     * `whereis nginx` 获取安装路径
     * `cd /usr/local/nginx/sbin/` 进入 nginx 路径
         * 启动、停止
+            * `kill -INT id` 根据 id 直接关闭进程
+            * `kill -QUIT id` 根据 id 等待进程任务结束关闭进程
+            * `kill -HUP id` 根据 id 等待进程任务结束重启进程
+            * `kill -USR1 id` 重读日志
+            * `kill -USR2 id` 平滑升级
+            * `kill -WINCH id` 等待旧进程任务结束后关闭旧进程
+            
             * `./nginx` 启动
             * `./nginx -s stop` 停止, 直接杀死进程
             * `./nginx -s quit` 停止, 等到进程处理完毕后停止
             * `./nginx -s reload` 重启
+            * `./nginx -s reopen` 重读日志
         * 查看进程 
             * `ps aux|grep nginx`
 
 * 配置 nginx
     * `cd /usr/local/nginx/conf` 进入配置路径
     * `vi nginx.conf` 编辑配置文件
+
+```conf
+# 全局区域
+
+# 配置有几个工作进程 - 一般设置为 cpu*核数
+worker_processes  1;
+
+# 一般是配置 nginx 连接的特性
+# 如几个同时工作
+events {
+    #这是指一个子进程最大允许连 1024 个链接
+    worker_connections  1024;
+}
+
+# 这是配置 http 服务器的主要段
+http {
+
+    # 日志格式
+    # log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                   '$status $body_bytes_sent "$http_referer" '
+    #                   '"$http_user_agent" "$http_x_forwarded_for"';
+
+    # 说明该 server 塔的访问日志文件是 logs/access.log, 使用的格式为 main
+    # access_log  logs/access.log  main;
+
+    # 这是虚拟主机段
+    server {
+        # 需要监听的端口
+        listen       80;
+        # 需要监听的域名或ip
+        server_name  localhost;
+
+        # 单独为该服务配置一个日志, 使用格式为 main
+        # access_log logs/localhost.log main
+
+        # 定位, 把特殊的路径或文件再次定位, 如 image 目录单独处理
+        location / {
+            # 文件路径
+            root   html;
+            # 默认取哪一个页面作为主页
+            index  index.html index.htm;
+        }
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        # location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        # }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        # location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        # }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        # location ~ /\.ht {
+        #    deny  all;
+        # }
+    }
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    # server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    # }
+
+
+    # HTTPS server
+    #
+    # server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    # }
+
+```
