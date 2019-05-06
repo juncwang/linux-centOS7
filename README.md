@@ -83,6 +83,7 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
 * `make` 开始编译文件--很慢
 * `sudo make install` 开始安装 nodejs
 * `node -v` 验证是否安装成功
+* `npm install -g cnpm --registry=https://registry.npm.taobao.org` 换源安装 cnpm
 
 ##### 安装 mongo
 * 在安装时均使用 root 用户，如果非 root 用户则在命令前加 sudo 命令，用来以 root 身份运行
