@@ -28,12 +28,21 @@
 * `gcc -v` 验证是否安装成功
 
 * `yum install lrzsz -y` 安装上传下载插件, 支持 `Xshell 5`
+    * 该方法只适用于 windows
+    * `rz` 上传
+    * `sz` 下载
 
 * `yum -y install vim*` 安装 vim
     * 基本操作
         * `:q` 直接退出
         * `:wq` 保存退出
         * `:set nu` 显示行号
+
+##### mac 链接服务器方法
+* `ssh username@servername` 链接服务器 用户名加服务器 ip
+* `scp username@servername:/serverPath/filename /localPath(本地目录)`  把服务器上的文件下载到本地目录
+* `scp /localPath/filename username@servername:/serverPath` 把本地文件上传到服务器目录
+* `scp -r ... ...` 上传下载整个文件目录及内容
 
 ##### 基本命令
 * `ps -ef|grep softName` 查看进程 id
