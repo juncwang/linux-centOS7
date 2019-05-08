@@ -94,6 +94,9 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
 * `node -v` 验证是否安装成功
 * `npm install -g cnpm --registry=https://registry.npm.taobao.org` 换源安装 cnpm
 
+* `npm install -g pm2` 安装 pm2 实现后台运行 nodejs 程序
+* `pm2 start server.js` 启动 nodejs 后台服务程序
+
 ##### 安装 mongo
 * 在安装时均使用 root 用户，如果非 root 用户则在命令前加 sudo 命令，用来以 root 身份运行
 * `https://www.mongodb.com` 获取下载路径压缩包
