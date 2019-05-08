@@ -226,7 +226,13 @@ cd /usr/local/mongodb/bin
 ```
 
 ##### 安装nginx
-* 安装前需要安装以下软件
+
+* yum 安装 nginx 方式
+    * `yum install epel-release`
+    * `yum install nginx` 安装 nginx
+    * `systemctl start nginx` 启动 nginx
+
+* 通过下载编译方式安装
     * `yum install gcc-c++` 
     * `yum install -y pcre pcre-devel`
     * `yum install -y zlib zlib-devel`
