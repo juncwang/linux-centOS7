@@ -109,16 +109,6 @@ tar -xzvf mongodb-linux-x86_64-rhel70-4.0.1.tgz
 # 3.将解压后的文件下所有内容移动到mongodb文件夹下
 # 注意这里不是将mongodb-linux-x86_64-rhel70-4.0.1文件夹移动到创建好的mongodb下，而是文件下的内容
 mv mongodb-linux-x86_64-rhel70-4.0.1/*  /usr/local/mongodb/
-
-# 4.添加mongodb的环境变量
-vi /etc/profile
-
-# 5.在文件末尾插入如下内容
-export MONGODB_HOME=/usr/local/mongodb  
-export PATH=$PATH:$MONGODB_HOME/bin
-
-# 6.修改保存后要重启系统配置，执行命令如下
-source /etc/profile
 ```
 
 * 经过上述步骤，基本的配置已经完成了，接下来创建mongodb数据文件和日志文件的存放位置，并且对启动项进行配置，启动项配置其中包含数据库文件路径和日志文件路径
