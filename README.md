@@ -97,6 +97,29 @@ kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
 * `npm install -g pm2` 安装 pm2 实现后台运行 nodejs 程序
 * `pm2 start server.js` 启动 nodejs 后台服务程序
 
+* nginx 反向代理配置
+```conf
+server {
+        listen       80;
+        server_name  javatest.lookk.cn;    #要访问的域名，我这里用的测试域名，如果有多个，用逗号分开
+ 
+        charset utf8;
+ 
+        location / {
+            proxy_pass       http://127.0.0.1:3000;               #映射到代理服务器，可以是ip加端口,   或url 
+            proxy_set_header Host      $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+ 
+       }
+    }
+--------------------- 
+作者：Sir814 
+来源：CSDN 
+原文：https://blog.csdn.net/gaomengwang/article/details/79707113 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+```
+
 ##### 安装 mongo
 * 在安装时均使用 root 用户，如果非 root 用户则在命令前加 sudo 命令，用来以 root 身份运行
 * `https://www.mongodb.com` 获取下载路径压缩包
