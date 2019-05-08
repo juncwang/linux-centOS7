@@ -232,6 +232,11 @@ cd /usr/local/mongodb/bin
     * `yum install nginx` 安装 nginx
     * `systemctl start nginx` 启动 nginx
 
+    * `systemctl enable nginx` 设置开机启动
+    * `systemctl disable nginx` 禁止开机启动
+    * `systemctl status nginx` 查看运行状态
+    * `systemctl restart nginx` 重启
+
 * 通过下载编译方式安装
     * `yum install gcc-c++` 
     * `yum install -y pcre pcre-devel`
