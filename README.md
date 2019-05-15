@@ -38,6 +38,10 @@
         * `:wq` 保存退出
         * `:set nu` 显示行号
 
+* `yum -y install unzip` 安装 unzip
+    * 基本操作
+        * `unzip zipName.zip` 解压文件
+
 ##### mac 链接服务器方法
 * `ssh username@servername` 链接服务器 用户名加服务器 ip
 * `scp username@servername:/serverPath/filename /localPath(本地目录)`  把服务器上的文件下载到本地目录
@@ -113,11 +117,6 @@ server {
  
        }
     }
---------------------- 
-作者：Sir814 
-来源：CSDN 
-原文：https://blog.csdn.net/gaomengwang/article/details/79707113 
-版权声明：本文为博主原创文章，转载请附上博文链接！
 ```
 
 ##### 安装 mongo
